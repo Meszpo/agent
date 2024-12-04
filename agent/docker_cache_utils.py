@@ -105,7 +105,7 @@ def get_cache_check_dockerfile(command: str, cache_target: str) -> str:
         FROM ubuntu:20.04
         ARG CACHE_BUST=1
         WORKDIR {cache_target}
-        RUN --mount=type=cache,target={cache_target},uid=1000,gid=1000 {command}
+        RUN --mount=type=cache,target={cache_target},uid=1001,gid=1001 {command}
     """
     return dedent(df).strip()
 
