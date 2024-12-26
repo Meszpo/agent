@@ -1,6 +1,10 @@
 FROM python:3.7-slim
 
-RUN useradd -ms /bin/bash frappe
+ARG USER_ID=1001
+ARG GROUP_ID=1001
+
+RUN groupadd -g $GROUP_ID frappe && \
+    useradd -m -u $USER_ID -g $GROUP_ID -s /bin/bash frappe
 USER frappe
 ENV HOME /home/frappe
 ENV PATH $PATH:$HOME/.local/bin
