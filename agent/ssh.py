@@ -30,7 +30,7 @@ class SSHProxy(Server):
 
     @step("Add User to Proxy")
     def add_user(self, name):
-        return self.docker_execute(f"useradd -m -p '*' {name} -u 1001 -g 1001")
+        return self.docker_execute(f"useradd -m -p '*' {name}")
 
     @step("Add Certificate to User")
     def add_certificate(self, name, certificate):
