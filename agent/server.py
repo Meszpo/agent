@@ -57,12 +57,9 @@ class Server(Base):
         docker_compose = os.path.join(bench_directory, "docker-compose.yml")
         self._render_template("bench/docker-compose.yml.jinja2", config, docker_compose)
 
-        uid = os.getuid()
-        gid = os.getgid()
-
         config_directory = os.path.join(bench_directory, "config")
         command = (
-            f"docker run --rm --net none -u {uid}:{gid} "
+            f"docker run --rm --net none "
             f"-v {config_directory}:/home/frappe/frappe-bench/configmount "
             f"{config['docker_image']} cp -LR config/. configmount"
         )
@@ -71,7 +68,7 @@ class Server(Base):
         sites_directory = os.path.join(bench_directory, "sites")
         # Copy sites directory from image to host system
         command = (
-            f"docker run --rm --net none -u {uid}:{gid}"
+            f"docker run --rm --net none"
             f"-v {sites_directory}:/home/frappe/frappe-bench/sitesmount "
             f"{config['docker_image']} cp -LR sites/. sitesmount"
         )
